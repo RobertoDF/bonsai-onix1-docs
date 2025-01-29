@@ -7,8 +7,8 @@ import spikeinterface.widgets as sw
 import probeinterface
 import probeinterface.plotting
 
-ap_gain = 500 # Change to the ap band gain used
-lfp_gain = 500 # Change to the lfp band gain used
+ap_gain = 1000 # Change to the ap band gain used
+lfp_gain = 50 # Change to the lfp band gain used
 suffix = 0 # Change to match file names' suffix
 num_channels = 384 # Decrease channels to expedite plotting and inspect fewer traces
 # Change this to the directory of your data. In this example, data's in the same directory as this data loading Python script
@@ -48,7 +48,7 @@ plt.subplots_adjust(wspace=0.3)
 ap_scalar = 1.2e6 / (2 ** bit_depth) / ap_gain
 ap_offset = (2 ** (bit_depth - 1)) * ap_scalar
 ap_recording = se.read_binary(os.path.join(data_directory,  f"np1-spike_{suffix}.raw"), 
-                           3e5, 
+                           3e4, 
                            np.uint16, 
                            num_channels, 
                            gain_to_uV=ap_scalar, 
@@ -65,7 +65,7 @@ ax[0].set_ylabel("AP (µV)")
 lfp_scalar = 1.2e6 / (2 ** bit_depth) / lfp_gain
 lfp_offset = (2 ** (bit_depth - 1)) * lfp_scalar
 lfp_recording = se.read_binary(os.path.join(data_directory,  f"np1-lfp_{suffix}.raw"), 
-                           3e5/12, 
+                           3e4/12, 
                            np.uint16, 
                            num_channels, 
                            gain_to_uV=lfp_scalar, 
